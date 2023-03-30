@@ -1,0 +1,2233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contraseña" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="tns:LoginRespuesta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginRespuesta">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="encontrado" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Empleado">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Legajo" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DNI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellido" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaNac" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rol" type="tns:RolEmpleado" />
+          <s:element minOccurs="0" maxOccurs="1" name="Correo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contraseña" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RolEmpleado">
+        <s:restriction base="s:string">
+          <s:enumeration value="Ninguno" />
+          <s:enumeration value="SupervisorCalidad" />
+          <s:enumeration value="SupervisorLinea" />
+          <s:enumeration value="Administrativo" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="InicializarBaseDeDatos">
+        <s:complexType />
+      </s:element>
+      <s:element name="InicializarBaseDeDatosResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarLineasDeTrabajo">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarLineasDeTrabajoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarLineasDeTrabajoResult" type="tns:ArrayOfLineaDeTrabajo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLineaDeTrabajo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LineaDeTrabajo" nillable="true" type="tns:LineaDeTrabajo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LineaDeTrabajo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Numero" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrdenAsociada" type="tns:OrdenDeProduccion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrdenDeProduccion">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaInicio" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaFin" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="tns:EstadoOP" />
+          <s:element minOccurs="0" maxOccurs="1" name="SupervisorLinea" type="tns:Empleado" />
+          <s:element minOccurs="0" maxOccurs="1" name="SupervisorCalidad" type="tns:Empleado" />
+          <s:element minOccurs="0" maxOccurs="1" name="Color" type="tns:Color" />
+          <s:element minOccurs="0" maxOccurs="1" name="Modelo" type="tns:Modelo" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroLinea" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Alertas" type="tns:ArrayOfAlerta" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jornadas" type="tns:ArrayOfJornadaLaboral" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EstadoOP">
+        <s:restriction base="s:string">
+          <s:enumeration value="ACTIVADA" />
+          <s:enumeration value="PAUSADA" />
+          <s:enumeration value="FINALIZADA" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Color">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Modelo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SKU" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Denominacion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LimiteInferiorReproceso" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LimiteInferiorObservado" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LimiteSuperiorReproceso" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LimiteSuperiorObservado" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAlerta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Alerta" nillable="true" type="tns:Alerta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Alerta">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaAlerta" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaReinicio" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tipo" type="tns:TipoDefecto" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="tns:EstadoAlerta" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TipoDefecto">
+        <s:restriction base="s:string">
+          <s:enumeration value="OBSERVADO" />
+          <s:enumeration value="REPROCESO" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EstadoAlerta">
+        <s:restriction base="s:string">
+          <s:enumeration value="VERDE" />
+          <s:enumeration value="AMARILLO" />
+          <s:enumeration value="ROJO" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfJornadaLaboral">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="JornadaLaboral" nillable="true" type="tns:JornadaLaboral" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="JornadaLaboral">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaInicio" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaFin" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Turno" type="tns:Turno" />
+          <s:element minOccurs="0" maxOccurs="1" name="Supervisor" type="tns:Empleado" />
+          <s:element minOccurs="0" maxOccurs="1" name="Incidencias" type="tns:ArrayOfIncidencia" />
+          <s:element minOccurs="1" maxOccurs="1" name="HermanadoPrimera" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HermanadoSegunda" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Turno">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HoraInicio" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HoraFin" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIncidencia">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Incidencia" nillable="true" type="tns:Incidencia" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Incidencia">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaHora" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaHoraRegistro" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Pie" type="tns:TipoPie" />
+          <s:element minOccurs="0" maxOccurs="1" name="Defecto" type="tns:Defecto" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoIncidencia" type="tns:TipoIncidencia" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TipoPie">
+        <s:restriction base="s:string">
+          <s:enumeration value="IZQUIERDO" />
+          <s:enumeration value="DERECHO" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Defecto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoDef" type="tns:TipoDefecto" />
+          <s:element minOccurs="1" maxOccurs="1" name="Eliminado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TipoIncidencia">
+        <s:restriction base="s:string">
+          <s:enumeration value="PRIMERA" />
+          <s:enumeration value="DEFECTO" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="EstadoDeLineasDeTrabajo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EstadoDeLineasDeTrabajoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EstadoDeLineasDeTrabajoResult" type="tns:ArrayOfEstadoLinea" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEstadoLinea">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstadoLinea" type="tns:EstadoLinea" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EstadoLinea">
+        <s:restriction base="s:string">
+          <s:enumeration value="Libre" />
+          <s:enumeration value="Disponible" />
+          <s:enumeration value="Inactiva" />
+          <s:enumeration value="Iniciada" />
+          <s:enumeration value="Ocupada" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetLineaDeTrabajo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="op" type="tns:OrdenDeProduccion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLineaDeTrabajoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLineaDeTrabajoResult" type="tns:LineaDeTrabajo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDefectosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefectosResult" type="tns:ArrayOfDefecto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDefecto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Defecto" nillable="true" type="tns:Defecto" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AñadirColor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="desc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AñadirColorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AñadirColorResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaABM">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Exito" />
+          <s:enumeration value="Error_Existente" />
+          <s:enumeration value="Error_Inexistente" />
+          <s:enumeration value="Error_DatosFaltantes" />
+          <s:enumeration value="Error_DatosInvalidos" />
+          <s:enumeration value="Error_EnUso" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ModificarColor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Color" type="tns:Color" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarColorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModificarColorResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarColor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarColorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EliminarColorResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarColores">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarColoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarColoresResult" type="tns:ArrayOfColor" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfColor">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Color" nillable="true" type="tns:Color" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTablaColores">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTablaColoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaColoresResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaColores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filtro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaColoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaFiltradaColoresResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarColor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarColorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarColorResult" type="tns:Color" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AñadirEmpleado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="legajo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="dni" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="rol" type="tns:RolEmpleado" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contraseña" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fecha" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AñadirEmpleadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AñadirEmpleadoResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarEmpleado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarEmpleadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModificarEmpleadoResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarEmpleado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarEmpleadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EliminarEmpleadoResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarEmpleados">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarEmpleadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarEmpleadosResult" type="tns:ArrayOfEmpleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEmpleado">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Empleado" nillable="true" type="tns:Empleado" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTablaEmpleados">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTablaEmpleadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaEmpleadosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaEmpleados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filtro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaEmpleadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaFiltradaEmpleadosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarEmpleado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarEmpleadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarEmpleadoResult" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerJornada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="nroLinea" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerJornadaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerJornadaResult" type="tns:JornadaLaboral" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IniciarJornada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="nroLinea" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IniciarJornadaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IniciarJornadaResult" type="tns:RespuestaJornada" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaJornada">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_LineaInexistente" />
+          <s:enumeration value="Error_SinOrden" />
+          <s:enumeration value="Error_OrdenInactiva" />
+          <s:enumeration value="Error_SinPermiso" />
+          <s:enumeration value="Error_FueraDeTurno" />
+          <s:enumeration value="Error_LineaOcupada" />
+          <s:enumeration value="Exito_Continuacion" />
+          <s:enumeration value="Exito_Creacion" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetListaIncidencias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListaIncidenciasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListaIncidenciasResult" type="tns:ArrayOfIncidencia" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarAccionesInspeccion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+            <s:element minOccurs="0" maxOccurs="1" name="acciones" type="tns:ArrayOfAccionDeInspeccion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAccionDeInspeccion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccionDeInspeccion" type="tns:AccionDeInspeccion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccionDeInspeccion">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="eliminar" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="idIncidencia" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipo" type="tns:TipoIncidencia" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipoDefecto" type="tns:TipoDefecto" />
+          <s:element minOccurs="1" maxOccurs="1" name="pie" type="tns:TipoPie" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="idDefecto" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RegistrarAccionesInspeccionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrarAccionesInspeccionResult" type="tns:RespuestaSincronizacion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaSincronizacion">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_SinPermiso" />
+          <s:enumeration value="Error_JornadaNoExistente" />
+          <s:enumeration value="Error_OrdenNoActiva" />
+          <s:enumeration value="Exito" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DesvincularSupervisorDeCalidad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DesvincularSupervisorDeCalidadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DesvincularSupervisorDeCalidadResult" type="tns:RespuestaDesvinculacion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaDesvinculacion">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_NoCalidad" />
+          <s:enumeration value="Error_NoVinculado" />
+          <s:enumeration value="Exito" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RegistrarHermanado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+            <s:element minOccurs="1" maxOccurs="1" name="totalesPrimera" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="totalesSegunda" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="validar" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarHermanadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrarHermanadoResult" type="tns:RespuestaHermanado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaHermanado">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_EmpleadoSinPermiso" />
+          <s:enumeration value="Error_FueraDeJornada" />
+          <s:enumeration value="Error_TotalesNoValidos" />
+          <s:enumeration value="Exito" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AñadirModelo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sku" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="denom" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lir" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lsr" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lso" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AñadirModeloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AñadirModeloResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarModelo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="modelo" type="tns:Modelo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarModeloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModificarModeloResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarModelo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SKU" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarModeloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EliminarModeloResult" type="tns:RespuestaABM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarModelos">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarModelosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarModelosResult" type="tns:ArrayOfModelo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModelo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Modelo" nillable="true" type="tns:Modelo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTablaModelos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTablaModelosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaModelosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaModelos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filtro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaModelosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaFiltradaModelosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarModelo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SKU" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarModeloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarModeloResult" type="tns:Modelo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearOrdenDeProduccion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+            <s:element minOccurs="0" maxOccurs="1" name="numero" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="numeroLinea" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="skuModelo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="color" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearOrdenDeProduccionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CrearOrdenDeProduccionResult" type="tns:RespuestaCreacionOP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaCreacionOP">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_Permisos" />
+          <s:enumeration value="Error_DatosFaltantes" />
+          <s:enumeration value="Error_DatosInvalidos" />
+          <s:enumeration value="Error_Existente" />
+          <s:enumeration value="Error_Linea" />
+          <s:enumeration value="Error_SupervisorOcupado" />
+          <s:enumeration value="Exito" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="PausarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PausarOrdenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PausarOrdenResult" type="tns:RespuestaCambioDeEstado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="RespuestaCambioDeEstado">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_Invalido" />
+          <s:enumeration value="Error_SinPermisos" />
+          <s:enumeration value="Error_EnInspeccion" />
+          <s:enumeration value="Exito" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ReanudarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReanudarOrdenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReanudarOrdenResult" type="tns:RespuestaCambioDeEstado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinalizarOrdenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinalizarOrdenResult" type="tns:RespuestaCambioDeEstado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarOrdenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarOrdenResult" type="tns:OrdenDeProduccion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarOrdenEnLinea">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="nroLinea" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarOrdenEnLineaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarOrdenEnLineaResult" type="tns:OrdenDeProduccion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarOrdenes">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarOrdenesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarOrdenesResult" type="tns:ArrayOfOrdenDeProduccion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOrdenDeProduccion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrdenDeProduccion" nillable="true" type="tns:OrdenDeProduccion" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTablaOrdenes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTablaOrdenesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaOrdenesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaOrdenes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filtro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablaFiltradaOrdenesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablaFiltradaOrdenesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarOrdenResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerInformacionSemaforo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="linea" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="empleado" type="tns:Empleado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerInformacionSemaforoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerInformacionSemaforoResult" type="tns:InformacionSemaforo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InformacionSemaforo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="reproceso" type="tns:EstadoAlerta" />
+          <s:element minOccurs="1" maxOccurs="1" name="observado" type="tns:EstadoAlerta" />
+          <s:element minOccurs="0" maxOccurs="1" name="defectosRecientes" type="tns:ArrayOfCuenta" />
+          <s:element minOccurs="1" maxOccurs="1" name="defectosTotales" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="respuesta" type="tns:RespuestaSemaforo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCuenta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cuenta" type="tns:Cuenta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cuenta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="defecto" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="cantidad" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RespuestaSemaforo">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error_Otro" />
+          <s:enumeration value="Error_LineaInexistente" />
+          <s:enumeration value="Error_LineaSinOrden" />
+          <s:enumeration value="Error_FueraDeJornada" />
+          <s:enumeration value="Error_EmpleadoSinPermiso" />
+          <s:enumeration value="Exito" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="InicializarBaseDeDatosSoapIn">
+    <wsdl:part name="parameters" element="tns:InicializarBaseDeDatos" />
+  </wsdl:message>
+  <wsdl:message name="InicializarBaseDeDatosSoapOut">
+    <wsdl:part name="parameters" element="tns:InicializarBaseDeDatosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarLineasDeTrabajoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarLineasDeTrabajo" />
+  </wsdl:message>
+  <wsdl:message name="ListarLineasDeTrabajoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarLineasDeTrabajoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EstadoDeLineasDeTrabajoSoapIn">
+    <wsdl:part name="parameters" element="tns:EstadoDeLineasDeTrabajo" />
+  </wsdl:message>
+  <wsdl:message name="EstadoDeLineasDeTrabajoSoapOut">
+    <wsdl:part name="parameters" element="tns:EstadoDeLineasDeTrabajoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLineaDeTrabajoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLineaDeTrabajo" />
+  </wsdl:message>
+  <wsdl:message name="GetLineaDeTrabajoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLineaDeTrabajoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefectos" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefectosResponse" />
+  </wsdl:message>
+  <wsdl:message name="AñadirColorSoapIn">
+    <wsdl:part name="parameters" element="tns:AñadirColor" />
+  </wsdl:message>
+  <wsdl:message name="AñadirColorSoapOut">
+    <wsdl:part name="parameters" element="tns:AñadirColorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarColorSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarColor" />
+  </wsdl:message>
+  <wsdl:message name="ModificarColorSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarColorResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarColorSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarColor" />
+  </wsdl:message>
+  <wsdl:message name="EliminarColorSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarColorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarColoresSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarColores" />
+  </wsdl:message>
+  <wsdl:message name="ListarColoresSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarColoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaColoresSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaColores" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaColoresSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaColoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaColoresSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaColores" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaColoresSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaColoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarColorSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarColor" />
+  </wsdl:message>
+  <wsdl:message name="BuscarColorSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarColorResponse" />
+  </wsdl:message>
+  <wsdl:message name="AñadirEmpleadoSoapIn">
+    <wsdl:part name="parameters" element="tns:AñadirEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="AñadirEmpleadoSoapOut">
+    <wsdl:part name="parameters" element="tns:AñadirEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarEmpleadoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="ModificarEmpleadoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarEmpleadoSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="EliminarEmpleadoSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarEmpleadosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarEmpleados" />
+  </wsdl:message>
+  <wsdl:message name="ListarEmpleadosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarEmpleadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaEmpleadosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaEmpleados" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaEmpleadosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaEmpleadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaEmpleadosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaEmpleados" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaEmpleadosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaEmpleadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarEmpleadoSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarEmpleado" />
+  </wsdl:message>
+  <wsdl:message name="BuscarEmpleadoSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarEmpleadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerJornadaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerJornada" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerJornadaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerJornadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IniciarJornadaSoapIn">
+    <wsdl:part name="parameters" element="tns:IniciarJornada" />
+  </wsdl:message>
+  <wsdl:message name="IniciarJornadaSoapOut">
+    <wsdl:part name="parameters" element="tns:IniciarJornadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListaIncidenciasSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListaIncidencias" />
+  </wsdl:message>
+  <wsdl:message name="GetListaIncidenciasSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListaIncidenciasResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarAccionesInspeccionSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarAccionesInspeccion" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarAccionesInspeccionSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarAccionesInspeccionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DesvincularSupervisorDeCalidadSoapIn">
+    <wsdl:part name="parameters" element="tns:DesvincularSupervisorDeCalidad" />
+  </wsdl:message>
+  <wsdl:message name="DesvincularSupervisorDeCalidadSoapOut">
+    <wsdl:part name="parameters" element="tns:DesvincularSupervisorDeCalidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarHermanadoSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarHermanado" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarHermanadoSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarHermanadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="AñadirModeloSoapIn">
+    <wsdl:part name="parameters" element="tns:AñadirModelo" />
+  </wsdl:message>
+  <wsdl:message name="AñadirModeloSoapOut">
+    <wsdl:part name="parameters" element="tns:AñadirModeloResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarModeloSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarModelo" />
+  </wsdl:message>
+  <wsdl:message name="ModificarModeloSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarModeloResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarModeloSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarModelo" />
+  </wsdl:message>
+  <wsdl:message name="EliminarModeloSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarModeloResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarModelosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarModelos" />
+  </wsdl:message>
+  <wsdl:message name="ListarModelosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarModelosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaModelosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaModelos" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaModelosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaModelosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaModelosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaModelos" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaModelosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaModelosResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarModeloSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarModelo" />
+  </wsdl:message>
+  <wsdl:message name="BuscarModeloSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarModeloResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearOrdenDeProduccionSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearOrdenDeProduccion" />
+  </wsdl:message>
+  <wsdl:message name="CrearOrdenDeProduccionSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearOrdenDeProduccionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PausarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:PausarOrden" />
+  </wsdl:message>
+  <wsdl:message name="PausarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:PausarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReanudarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:ReanudarOrden" />
+  </wsdl:message>
+  <wsdl:message name="ReanudarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:ReanudarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinalizarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:FinalizarOrden" />
+  </wsdl:message>
+  <wsdl:message name="FinalizarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:FinalizarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarOrden" />
+  </wsdl:message>
+  <wsdl:message name="BuscarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarOrdenEnLineaSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarOrdenEnLinea" />
+  </wsdl:message>
+  <wsdl:message name="BuscarOrdenEnLineaSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarOrdenEnLineaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarOrdenesSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarOrdenes" />
+  </wsdl:message>
+  <wsdl:message name="ListarOrdenesSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarOrdenesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaOrdenesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaOrdenes" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaOrdenesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaOrdenesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaOrdenesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaOrdenes" />
+  </wsdl:message>
+  <wsdl:message name="GetTablaFiltradaOrdenesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablaFiltradaOrdenesResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarOrden" />
+  </wsdl:message>
+  <wsdl:message name="EliminarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerInformacionSemaforoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerInformacionSemaforo" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerInformacionSemaforoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerInformacionSemaforoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDSServiceSoap">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InicializarBaseDeDatos">
+      <wsdl:input message="tns:InicializarBaseDeDatosSoapIn" />
+      <wsdl:output message="tns:InicializarBaseDeDatosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarLineasDeTrabajo">
+      <wsdl:input message="tns:ListarLineasDeTrabajoSoapIn" />
+      <wsdl:output message="tns:ListarLineasDeTrabajoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EstadoDeLineasDeTrabajo">
+      <wsdl:input message="tns:EstadoDeLineasDeTrabajoSoapIn" />
+      <wsdl:output message="tns:EstadoDeLineasDeTrabajoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLineaDeTrabajo">
+      <wsdl:input message="tns:GetLineaDeTrabajoSoapIn" />
+      <wsdl:output message="tns:GetLineaDeTrabajoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectos">
+      <wsdl:input message="tns:GetDefectosSoapIn" />
+      <wsdl:output message="tns:GetDefectosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AñadirColor">
+      <wsdl:input message="tns:AñadirColorSoapIn" />
+      <wsdl:output message="tns:AñadirColorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarColor">
+      <wsdl:input message="tns:ModificarColorSoapIn" />
+      <wsdl:output message="tns:ModificarColorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarColor">
+      <wsdl:input message="tns:EliminarColorSoapIn" />
+      <wsdl:output message="tns:EliminarColorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarColores">
+      <wsdl:input message="tns:ListarColoresSoapIn" />
+      <wsdl:output message="tns:ListarColoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaColores">
+      <wsdl:input message="tns:GetTablaColoresSoapIn" />
+      <wsdl:output message="tns:GetTablaColoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaColores">
+      <wsdl:input message="tns:GetTablaFiltradaColoresSoapIn" />
+      <wsdl:output message="tns:GetTablaFiltradaColoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarColor">
+      <wsdl:input message="tns:BuscarColorSoapIn" />
+      <wsdl:output message="tns:BuscarColorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AñadirEmpleado">
+      <wsdl:input message="tns:AñadirEmpleadoSoapIn" />
+      <wsdl:output message="tns:AñadirEmpleadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarEmpleado">
+      <wsdl:input message="tns:ModificarEmpleadoSoapIn" />
+      <wsdl:output message="tns:ModificarEmpleadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEmpleado">
+      <wsdl:input message="tns:EliminarEmpleadoSoapIn" />
+      <wsdl:output message="tns:EliminarEmpleadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEmpleados">
+      <wsdl:input message="tns:ListarEmpleadosSoapIn" />
+      <wsdl:output message="tns:ListarEmpleadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaEmpleados">
+      <wsdl:input message="tns:GetTablaEmpleadosSoapIn" />
+      <wsdl:output message="tns:GetTablaEmpleadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaEmpleados">
+      <wsdl:input message="tns:GetTablaFiltradaEmpleadosSoapIn" />
+      <wsdl:output message="tns:GetTablaFiltradaEmpleadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEmpleado">
+      <wsdl:input message="tns:BuscarEmpleadoSoapIn" />
+      <wsdl:output message="tns:BuscarEmpleadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerJornada">
+      <wsdl:input message="tns:ObtenerJornadaSoapIn" />
+      <wsdl:output message="tns:ObtenerJornadaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IniciarJornada">
+      <wsdl:input message="tns:IniciarJornadaSoapIn" />
+      <wsdl:output message="tns:IniciarJornadaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListaIncidencias">
+      <wsdl:input message="tns:GetListaIncidenciasSoapIn" />
+      <wsdl:output message="tns:GetListaIncidenciasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarAccionesInspeccion">
+      <wsdl:input message="tns:RegistrarAccionesInspeccionSoapIn" />
+      <wsdl:output message="tns:RegistrarAccionesInspeccionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DesvincularSupervisorDeCalidad">
+      <wsdl:input message="tns:DesvincularSupervisorDeCalidadSoapIn" />
+      <wsdl:output message="tns:DesvincularSupervisorDeCalidadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarHermanado">
+      <wsdl:input message="tns:RegistrarHermanadoSoapIn" />
+      <wsdl:output message="tns:RegistrarHermanadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AñadirModelo">
+      <wsdl:input message="tns:AñadirModeloSoapIn" />
+      <wsdl:output message="tns:AñadirModeloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarModelo">
+      <wsdl:input message="tns:ModificarModeloSoapIn" />
+      <wsdl:output message="tns:ModificarModeloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarModelo">
+      <wsdl:input message="tns:EliminarModeloSoapIn" />
+      <wsdl:output message="tns:EliminarModeloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarModelos">
+      <wsdl:input message="tns:ListarModelosSoapIn" />
+      <wsdl:output message="tns:ListarModelosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaModelos">
+      <wsdl:input message="tns:GetTablaModelosSoapIn" />
+      <wsdl:output message="tns:GetTablaModelosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaModelos">
+      <wsdl:input message="tns:GetTablaFiltradaModelosSoapIn" />
+      <wsdl:output message="tns:GetTablaFiltradaModelosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarModelo">
+      <wsdl:input message="tns:BuscarModeloSoapIn" />
+      <wsdl:output message="tns:BuscarModeloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearOrdenDeProduccion">
+      <wsdl:input message="tns:CrearOrdenDeProduccionSoapIn" />
+      <wsdl:output message="tns:CrearOrdenDeProduccionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PausarOrden">
+      <wsdl:input message="tns:PausarOrdenSoapIn" />
+      <wsdl:output message="tns:PausarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReanudarOrden">
+      <wsdl:input message="tns:ReanudarOrdenSoapIn" />
+      <wsdl:output message="tns:ReanudarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizarOrden">
+      <wsdl:input message="tns:FinalizarOrdenSoapIn" />
+      <wsdl:output message="tns:FinalizarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarOrden">
+      <wsdl:input message="tns:BuscarOrdenSoapIn" />
+      <wsdl:output message="tns:BuscarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarOrdenEnLinea">
+      <wsdl:input message="tns:BuscarOrdenEnLineaSoapIn" />
+      <wsdl:output message="tns:BuscarOrdenEnLineaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarOrdenes">
+      <wsdl:input message="tns:ListarOrdenesSoapIn" />
+      <wsdl:output message="tns:ListarOrdenesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaOrdenes">
+      <wsdl:input message="tns:GetTablaOrdenesSoapIn" />
+      <wsdl:output message="tns:GetTablaOrdenesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaOrdenes">
+      <wsdl:input message="tns:GetTablaFiltradaOrdenesSoapIn" />
+      <wsdl:output message="tns:GetTablaFiltradaOrdenesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarOrden">
+      <wsdl:input message="tns:EliminarOrdenSoapIn" />
+      <wsdl:output message="tns:EliminarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInformacionSemaforo">
+      <wsdl:input message="tns:ObtenerInformacionSemaforoSoapIn" />
+      <wsdl:output message="tns:ObtenerInformacionSemaforoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IDSServiceSoap" type="tns:IDSServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InicializarBaseDeDatos">
+      <soap:operation soapAction="http://tempuri.org/InicializarBaseDeDatos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarLineasDeTrabajo">
+      <soap:operation soapAction="http://tempuri.org/ListarLineasDeTrabajo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EstadoDeLineasDeTrabajo">
+      <soap:operation soapAction="http://tempuri.org/EstadoDeLineasDeTrabajo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLineaDeTrabajo">
+      <soap:operation soapAction="http://tempuri.org/GetLineaDeTrabajo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectos">
+      <soap:operation soapAction="http://tempuri.org/GetDefectos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AñadirColor">
+      <soap:operation soapAction="http://tempuri.org/AñadirColor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarColor">
+      <soap:operation soapAction="http://tempuri.org/ModificarColor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarColor">
+      <soap:operation soapAction="http://tempuri.org/EliminarColor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarColores">
+      <soap:operation soapAction="http://tempuri.org/ListarColores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaColores">
+      <soap:operation soapAction="http://tempuri.org/GetTablaColores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaColores">
+      <soap:operation soapAction="http://tempuri.org/GetTablaFiltradaColores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarColor">
+      <soap:operation soapAction="http://tempuri.org/BuscarColor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AñadirEmpleado">
+      <soap:operation soapAction="http://tempuri.org/AñadirEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarEmpleado">
+      <soap:operation soapAction="http://tempuri.org/ModificarEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEmpleado">
+      <soap:operation soapAction="http://tempuri.org/EliminarEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEmpleados">
+      <soap:operation soapAction="http://tempuri.org/ListarEmpleados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaEmpleados">
+      <soap:operation soapAction="http://tempuri.org/GetTablaEmpleados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaEmpleados">
+      <soap:operation soapAction="http://tempuri.org/GetTablaFiltradaEmpleados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEmpleado">
+      <soap:operation soapAction="http://tempuri.org/BuscarEmpleado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerJornada">
+      <soap:operation soapAction="http://tempuri.org/ObtenerJornada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IniciarJornada">
+      <soap:operation soapAction="http://tempuri.org/IniciarJornada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaIncidencias">
+      <soap:operation soapAction="http://tempuri.org/GetListaIncidencias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarAccionesInspeccion">
+      <soap:operation soapAction="http://tempuri.org/RegistrarAccionesInspeccion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DesvincularSupervisorDeCalidad">
+      <soap:operation soapAction="http://tempuri.org/DesvincularSupervisorDeCalidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarHermanado">
+      <soap:operation soapAction="http://tempuri.org/RegistrarHermanado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AñadirModelo">
+      <soap:operation soapAction="http://tempuri.org/AñadirModelo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarModelo">
+      <soap:operation soapAction="http://tempuri.org/ModificarModelo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarModelo">
+      <soap:operation soapAction="http://tempuri.org/EliminarModelo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarModelos">
+      <soap:operation soapAction="http://tempuri.org/ListarModelos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaModelos">
+      <soap:operation soapAction="http://tempuri.org/GetTablaModelos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaModelos">
+      <soap:operation soapAction="http://tempuri.org/GetTablaFiltradaModelos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarModelo">
+      <soap:operation soapAction="http://tempuri.org/BuscarModelo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearOrdenDeProduccion">
+      <soap:operation soapAction="http://tempuri.org/CrearOrdenDeProduccion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PausarOrden">
+      <soap:operation soapAction="http://tempuri.org/PausarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReanudarOrden">
+      <soap:operation soapAction="http://tempuri.org/ReanudarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizarOrden">
+      <soap:operation soapAction="http://tempuri.org/FinalizarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarOrden">
+      <soap:operation soapAction="http://tempuri.org/BuscarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarOrdenEnLinea">
+      <soap:operation soapAction="http://tempuri.org/BuscarOrdenEnLinea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarOrdenes">
+      <soap:operation soapAction="http://tempuri.org/ListarOrdenes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaOrdenes">
+      <soap:operation soapAction="http://tempuri.org/GetTablaOrdenes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaOrdenes">
+      <soap:operation soapAction="http://tempuri.org/GetTablaFiltradaOrdenes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarOrden">
+      <soap:operation soapAction="http://tempuri.org/EliminarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInformacionSemaforo">
+      <soap:operation soapAction="http://tempuri.org/ObtenerInformacionSemaforo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IDSServiceSoap12" type="tns:IDSServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InicializarBaseDeDatos">
+      <soap12:operation soapAction="http://tempuri.org/InicializarBaseDeDatos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarLineasDeTrabajo">
+      <soap12:operation soapAction="http://tempuri.org/ListarLineasDeTrabajo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EstadoDeLineasDeTrabajo">
+      <soap12:operation soapAction="http://tempuri.org/EstadoDeLineasDeTrabajo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLineaDeTrabajo">
+      <soap12:operation soapAction="http://tempuri.org/GetLineaDeTrabajo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectos">
+      <soap12:operation soapAction="http://tempuri.org/GetDefectos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AñadirColor">
+      <soap12:operation soapAction="http://tempuri.org/AñadirColor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarColor">
+      <soap12:operation soapAction="http://tempuri.org/ModificarColor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarColor">
+      <soap12:operation soapAction="http://tempuri.org/EliminarColor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarColores">
+      <soap12:operation soapAction="http://tempuri.org/ListarColores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaColores">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaColores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaColores">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaFiltradaColores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarColor">
+      <soap12:operation soapAction="http://tempuri.org/BuscarColor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AñadirEmpleado">
+      <soap12:operation soapAction="http://tempuri.org/AñadirEmpleado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarEmpleado">
+      <soap12:operation soapAction="http://tempuri.org/ModificarEmpleado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEmpleado">
+      <soap12:operation soapAction="http://tempuri.org/EliminarEmpleado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEmpleados">
+      <soap12:operation soapAction="http://tempuri.org/ListarEmpleados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaEmpleados">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaEmpleados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaEmpleados">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaFiltradaEmpleados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarEmpleado">
+      <soap12:operation soapAction="http://tempuri.org/BuscarEmpleado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerJornada">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerJornada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IniciarJornada">
+      <soap12:operation soapAction="http://tempuri.org/IniciarJornada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListaIncidencias">
+      <soap12:operation soapAction="http://tempuri.org/GetListaIncidencias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarAccionesInspeccion">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarAccionesInspeccion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DesvincularSupervisorDeCalidad">
+      <soap12:operation soapAction="http://tempuri.org/DesvincularSupervisorDeCalidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarHermanado">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarHermanado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AñadirModelo">
+      <soap12:operation soapAction="http://tempuri.org/AñadirModelo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarModelo">
+      <soap12:operation soapAction="http://tempuri.org/ModificarModelo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarModelo">
+      <soap12:operation soapAction="http://tempuri.org/EliminarModelo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarModelos">
+      <soap12:operation soapAction="http://tempuri.org/ListarModelos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaModelos">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaModelos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaModelos">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaFiltradaModelos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarModelo">
+      <soap12:operation soapAction="http://tempuri.org/BuscarModelo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearOrdenDeProduccion">
+      <soap12:operation soapAction="http://tempuri.org/CrearOrdenDeProduccion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PausarOrden">
+      <soap12:operation soapAction="http://tempuri.org/PausarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReanudarOrden">
+      <soap12:operation soapAction="http://tempuri.org/ReanudarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizarOrden">
+      <soap12:operation soapAction="http://tempuri.org/FinalizarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarOrden">
+      <soap12:operation soapAction="http://tempuri.org/BuscarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarOrdenEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/BuscarOrdenEnLinea" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarOrdenes">
+      <soap12:operation soapAction="http://tempuri.org/ListarOrdenes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaOrdenes">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaOrdenes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTablaFiltradaOrdenes">
+      <soap12:operation soapAction="http://tempuri.org/GetTablaFiltradaOrdenes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarOrden">
+      <soap12:operation soapAction="http://tempuri.org/EliminarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInformacionSemaforo">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerInformacionSemaforo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IDSService">
+    <wsdl:port name="IDSServiceSoap" binding="tns:IDSServiceSoap">
+      <soap:address location="http://localhost:2608/Servicios/IDSService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IDSServiceSoap12" binding="tns:IDSServiceSoap12">
+      <soap12:address location="http://localhost:2608/Servicios/IDSService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

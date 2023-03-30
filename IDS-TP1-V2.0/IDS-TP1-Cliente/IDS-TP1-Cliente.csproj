@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{213EA953-BFCF-4371-84AF-E4FFF49D8F2A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>IDS_TP1_Cliente</RootNamespace>
+    <AssemblyName>IDS-TP1-Cliente</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\WebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="CacheInspeccion.cs" />
+    <Compile Include="FormABMColores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormABMColores.Designer.cs">
+      <DependentUpon>FormABMColores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormABMEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormABMEmpleados.Designer.cs">
+      <DependentUpon>FormABMEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormABMModelos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormABMModelos.Designer.cs">
+      <DependentUpon>FormABMModelos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormColor.Designer.cs">
+      <DependentUpon>FormColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCreacionOP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreacionOP.Designer.cs">
+      <DependentUpon>FormCreacionOP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpleado.Designer.cs">
+      <DependentUpon>FormEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHermanado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHermanado.Designer.cs">
+      <DependentUpon>FormHermanado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormIncidencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIncidencia.Designer.cs">
+      <DependentUpon>FormIncidencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInspeccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInspeccion.Designer.cs">
+      <DependentUpon>FormInspeccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLineas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLineas.Designer.cs">
+      <DependentUpon>FormLineas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModelo.Designer.cs">
+      <DependentUpon>FormModelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOPs_SupLinea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOPs_SupLinea.Designer.cs">
+      <DependentUpon>FormOPs_SupLinea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSemaforos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSemaforos.Designer.cs">
+      <DependentUpon>FormSemaforos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mensajes.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormABMColores.resx">
+      <DependentUpon>FormABMColores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormABMEmpleados.resx">
+      <DependentUpon>FormABMEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormABMModelos.resx">
+      <DependentUpon>FormABMModelos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormColor.resx">
+      <DependentUpon>FormColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCreacionOP.resx">
+      <DependentUpon>FormCreacionOP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpleado.resx">
+      <DependentUpon>FormEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHermanado.resx">
+      <DependentUpon>FormHermanado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormIncidencia.resx">
+      <DependentUpon>FormIncidencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInspeccion.resx">
+      <DependentUpon>FormInspeccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLineas.resx">
+      <DependentUpon>FormLineas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModelo.resx">
+      <DependentUpon>FormModelo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOPs_SupLinea.resx">
+      <DependentUpon>FormOPs_SupLinea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSemaforos.resx">
+      <DependentUpon>FormSemaforos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Connected Services\WebService\IDSService1.wsdl" />
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.Color.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.Defecto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.Empleado.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.EstadoLinea.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.Incidencia.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.InformacionSemaforo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.JornadaLaboral.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.LineaDeTrabajo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.LoginRespuesta.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.Modelo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.OrdenDeProduccion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RegistrarAccionesInspeccionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaABM.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaCambioDeEstado.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaCreacionOP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaDesvinculacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaHermanado.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaJornada.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WebService\IDS_TP1_Cliente.WebService.RespuestaSincronizacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\WebService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\WebService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\WebService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\WebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\WebService\IDSService1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\semaforo_amarillo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\semaforo_apagado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\semaforo_rojo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\semaforo_verde.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
